@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Qual o nome da sua esposa?</h1>
+    <input id="entrada" type="text">
+    <button id="botao" style="width: 150px; height: 50px;" onclick="envio()">Salvar</button>
+
+    <script>
+        const entrada = document.getElementById("entrada");
+
+        function envio() {
+            localStorage.setItem("Esposa", entrada.value);
+            alert("Nome salvo com sucesso!");
+        }
+
+        // Recuperar o nome salvo ao carregar a página
+        window.onload = function () {
+            const esposa = localStorage.getItem("Esposa");
+            if (esposa) {
+                alert("Nome salvo no LocalStorage: " + esposa);
+            }
+        };
+    </script>
+
+</body>
+</html>
