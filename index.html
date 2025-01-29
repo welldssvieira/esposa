@@ -4,17 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="style.css">
     <title>Esposa</title>
 </head>
 
 <body>
 
 
-    <h1 id="titulo">Qual o seu nome ?</h1>
-    <input id="entrada" type="text">
-    <button id="botao" style="width: 150px; height: 50px;" onclick="envio()">Salvar</button>
+    <div id="titulo">
+        <h1 >Qual o seu nome ?</h1>
+    </div>
 
+    <div id="entrada">
+        <input type="text">
+    </div>
+
+    <div id="botao">
+        <button style="width: 150px; height: 50px;" onclick="envio()">Salvar</button>
+    </div>
 
     <script>
 
@@ -41,9 +48,9 @@
             ", ele te escolhe e sempre vai te escolher!"
         ];
 
-        const titulo = document.getElementById("titulo");
-        const entrada = document.getElementById("entrada");
-        const botao = document.getElementById("botao");
+        const titulo = document.querySelector("#titulo h1");
+        const entrada = document.querySelector("#entrada input");
+        const botao = document.querySelector("#botao button");
 
         function envio() {
             localStorage.setItem("Esposa", entrada.value);
@@ -51,10 +58,15 @@
 
             localStorage.setItem("display","none")
 
-
             titulo.style.display = "none"
             entrada.style.display = "none"
             botao.style.display = "none"
+
+            const esposa = localStorage.getItem("Esposa");
+            const mensagem = `${esposa}${frasesRomanticas[Math.floor(Math.random() * frasesRomanticas.length)]}`;
+
+                alert(mensagem)
+
         }
 
         // Recuperar o nome salvo ao carregar a página
@@ -70,6 +82,7 @@
                 const mensagem = `${esposa}${frasesRomanticas[Math.floor(Math.random() * frasesRomanticas.length)]}`;
 
                 alert(mensagem)
+                
             } else {
 
             }
