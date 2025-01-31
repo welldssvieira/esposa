@@ -23,6 +23,11 @@
         <button style="width: 150px; height: 50px;" onclick="envio()">Salvar</button>
     </div>
 
+    <div id="frase">
+        <img src="" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, sunt vitae provident labore unde nisi asperiores eos illum neque? Pariatur eligendi blanditiis alias qui assumenda labore minus hic sequi quam.</p>
+    </div>
+
     <script>
 
         const frasesRomanticas = [
@@ -51,6 +56,7 @@
         const titulo = document.querySelector("#titulo h1");
         const entrada = document.querySelector("#entrada input");
         const botao = document.querySelector("#botao button");
+        const frase = document.querySelector("#frase p");
 
         function envio() {
             localStorage.setItem("Esposa", entrada.value);
@@ -65,7 +71,7 @@
             const esposa = localStorage.getItem("Esposa");
             const mensagem = `${esposa}${frasesRomanticas[Math.floor(Math.random() * frasesRomanticas.length)]}`;
 
-                alert(mensagem)
+            alert(mensagem)
 
         }
 
@@ -81,7 +87,7 @@
             if (esposa) {
                 const mensagem = `${esposa}${frasesRomanticas[Math.floor(Math.random() * frasesRomanticas.length)]}`;
 
-                alert(mensagem)
+                frase.textContent = (mensagem)
                 
             } else {
 
