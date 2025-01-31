@@ -67,11 +67,12 @@
             titulo.style.display = "none"
             entrada.style.display = "none"
             botao.style.display = "none"
+            frase.style.display = "none"
 
             const esposa = localStorage.getItem("Esposa");
             const mensagem = `${esposa}${frasesRomanticas[Math.floor(Math.random() * frasesRomanticas.length)]}`;
 
-            alert(mensagem)
+            frase.textContent = (mensagem)
 
         }
 
