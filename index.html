@@ -12,7 +12,7 @@
 
 
     <div id="titulo">
-        <h1 >Qual o seu nome ?</h1>
+        <h1>Qual o seu nome ?</h1>
     </div>
 
     <div id="entrada">
@@ -25,32 +25,142 @@
 
     <div id="frase">
         <img src="" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, sunt vitae provident labore unde nisi asperiores eos illum neque? Pariatur eligendi blanditiis alias qui assumenda labore minus hic sequi quam.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, sunt vitae provident labore unde nisi
+            asperiores eos illum neque? Pariatur eligendi blanditiis alias qui assumenda labore minus hic sequi quam.
+        </p>
+        <div class="data">
+            <span></span>
+            <p>12 de Fev. de 2025</p>
+        </div>
+    </div>
+
+    <div id="imagem">
+        <img src="img/a (1).jpg" alt="">
     </div>
 
     <script>
+// Gera as imagens aleatórias.
+const romanticKeywords = ["romantic", "love", "couple", "sunset", "valentine"];
 
+async function getRandomRomanticImage() {
+    const query = romanticKeywords[Math.floor(Math.random() * romanticKeywords.length)];
+    const url = `https://api.pexels.com/v1/search?query=${query}&per_page=10`;
+
+    // Defina sua chave de API aqui
+    const apiKey = 'L8vRjlZV54aGQs6II63nagb6fizPe1S5Njr1x8jlIDSRKDjrXaiaPwx0';  // Substitua pela sua chave da Pexels.
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        }
+    });
+
+    // Verifica se a resposta da API é bem-sucedida
+    if (response.ok) {
+        const data = await response.json();
+        if (data.photos.length > 0) {
+            const randomPhoto = data.photos[Math.floor(Math.random() * data.photos.length)];
+            document.querySelector("#imagem img").src = randomPhoto.src.large;
+        }
+    } else {
+        console.error('Erro ao buscar imagens:', response.statusText);
+    }
+}
+
+
+
+        // Gera frases românticas.
         const frasesRomanticas = [
-            ", seu esposo te ama muito!",
-            ", você é o amor da vida dele!",
-            ", ele pensa em você o tempo todo!",
-            ", seu sorriso ilumina os dias dele!",
-            ", estar ao seu lado é a maior alegria dele!",
-            ", cada dia com você é um presente!",
-            ", ele faria qualquer coisa para te ver feliz!",
-            ", o coração dele bate mais forte por você!",
-            ", você é o melhor sonho que ele já teve!",
-            ", a vida dele é mais bonita porque tem você!",
-            ", cada momento com você é inesquecível!",
-            ", ele se sente completo ao seu lado!",
-            ", amar você é a melhor parte da vida dele!",
-            ", você é a razão do brilho nos olhos dele!",
-            ", ele te ama mais do que palavras podem expressar!",
-            ", seu abraço é o lar dele!",
-            ", você é a inspiração dele todos os dias!",
-            ", tudo que ele quer é te fazer feliz!",
-            ", você faz o mundo dele mais bonito!",
-            ", ele te escolhe e sempre vai te escolher!"
+            ", você é o melhor capítulo da história da vida dele!",
+            ", se amor fosse um idioma, ele só falaria sobre você!",
+            ", você é o GPS do coração dele: sempre apontando para o amor!",
+            ", você é o sol que aquece os dias frios dele!",
+            ", até os filmes de romance invejam a história de vocês!",
+            ", cada ‘eu te amo’ dele carrega o universo inteiro!",
+            ", sua risada é a trilha sonora favorita dele!",
+            ", se houvesse um dicionário do amor, sua foto estaria ao lado da palavra 'perfeita'!",
+            ", ele trocaria qualquer banquete por um jantar à luz de velas com você!",
+            ", se ele fosse um navegador, seu coração seria o mapa e o destino!",
+            ", mesmo sem Wi-Fi, a conexão entre vocês nunca cai!",
+            ", seu toque é a única senha que desbloqueia o coração dele!",
+            ", ele te ama mais do que um programador ama café!",
+            ", se ele pudesse escolher entre ganhar na loteria ou ter você, ele escolheria você. E ainda te daria o bilhete premiado!",
+            ", ele te ama tanto que se apaixonaria por você de novo em todas as vidas!",
+            ", se houvesse uma Olimpíada do amor, ele ganharia ouro por amar você!",
+            ", ele não precisa de GPS para saber que o melhor lugar do mundo é ao seu lado!",
+            ", se o amor fosse uma equação, você seria a única solução!",
+            ", nem todo chocolate do mundo é tão doce quanto seu carinho!",
+            ", seu amor por ele é a única coisa infinita além do universo!",
+            ", se ele fosse um astronauta, você seria sua estrela-guia!",
+            ", seu amor é a melhor playlist da vida dele!",
+            ", com você, todos os dias são um feriado no coração dele!",
+            ", se o amor fosse um jogo, ele já zerou só por ter você!",
+            ", cada mensagem sua no celular dele vale mais que uma notificação de PIX!",
+            ", se você fosse um livro, ele passaria a vida inteira relendo!",
+            ", ele não precisa de Netflix, porque sua companhia já é um filme perfeito!",
+            ", cada ‘bom dia’ seu é como ganhar na loteria emocional!",
+            ", ele trocaria qualquer viagem pelo mundo só para ficar abraçado com você!",
+            ", se ele fosse um poeta, todos os versos seriam sobre você!",
+            ", se seu amor fosse um café, ele tomaria litros todos os dias!",
+            ", com você, até os dias nublados brilham mais!",
+            ", se o amor tivesse um som, seria o seu ‘eu te amo’!",
+            ", ele te ama mais do que um gamer ama XP!",
+            ", se o coração dele fosse uma playlist, você estaria no repeat!",
+            ", o universo dele gira ao redor do seu sorriso!",
+            ", você é a tela onde ele pinta os melhores momentos da vida!",
+            ", sem você, a vida dele seria como um filme sem final feliz!",
+            ", você é a melhor surpresa que o destino já preparou para ele!",
+            ", cada abraço seu recarrega as energias do coração dele!",
+            ", se seu amor fosse um Wi-Fi, a senha seria ‘pra sempre nós’!",
+            ", nem a Lua e as estrelas brilham tanto quanto você nos olhos dele!",
+            ", ele trocaria mil diamantes por um segundo ao seu lado!",
+            ", você é o sorvete num dia quente, o cobertor num dia frio!",
+            ", ele não precisa de farol, porque você ilumina o caminho dele!",
+            ", cada sorriso seu é um 'level up' no jogo da vida dele!",
+            ", seu amor é o melhor superpoder que ele já teve!",
+            ", se você fosse um perfume, seria o único que ele usaria!",
+            ", ele aprendeu que amor verdadeiro existe depois que conheceu você!",
+            ", você é a obra-prima no museu do coração dele!",
+            ", amar você é como respirar: natural e essencial!",
+            ", se a vida fosse um quebra-cabeça, você seria a peça que faltava!",
+            ", seu amor é o melhor remédio contra qualquer tristeza!",
+            ", ele trocaria mil likes na internet por um sorriso seu na vida real!",
+            ", se amor fosse uma melodia, a sua voz seria a canção favorita dele!",
+            ", com você, até segundas-feiras são incríveis!",
+            ", ele te ama mais do que um nerd ama spoilers!",
+            ", você é a trilha sonora dos melhores momentos da vida dele!",
+            ", se o coração dele tivesse um mural, só teria fotos suas!",
+            ", você é a receita perfeita para a felicidade dele!",
+            ", seu amor é como Wi-Fi: ele se conecta automaticamente!",
+            ", ele não precisa de bússola, porque seu amor sempre o guia!",
+            ", cada momento ao seu lado é um checkpoint no jogo da felicidade!",
+            ", se o amor fosse um jardim, você seria a flor mais linda!",
+            ", ele daria todas as estrelas do céu só para ver você sorrir!",
+            ", se você fosse uma arte, seria a Monalisa do coração dele!",
+            ", ele escreveria um livro só para descrever o quanto te ama!",
+            ", você é a calmaria no mar agitado da vida dele!",
+            ", amar você é a coisa mais fácil que ele já fez!",
+            ", se houvesse um museu do amor, nossa história estaria na entrada!",
+            ", seu beijo tem mais poder de cura que qualquer remédio!",
+            ", ele não precisa de mágica, pois amar você já é um encanto!",
+            ", você é o final feliz que ele sempre sonhou!",
+            ", ele não precisa de filtro no Instagram, porque seu amor já ilumina tudo!",
+            ", se o amor fosse uma pizza, você seria a fatia favorita dele!",
+            ", ele trocaria todas as manhãs preguiçosas só para acordar ao seu lado!",
+            ", amar você é a maior certeza que ele já teve!",
+            ", se o amor fosse uma viagem, o destino final seria você!",
+            ", ele te ama mais do que um viciado em café ama uma xícara quente!",
+            ", seu amor é a trilha sonora perfeita para a vida dele!",
+            ", ele faria de tudo para garantir que seu coração sempre sorria!",
+            ", se amar você fosse um esporte, ele já teria a medalha de ouro!",
+            ", cada vez que ele olha para você, se apaixona de novo!",
+            ", ele não precisa de sonhos quando tem você na realidade!",
+            ", você é o ‘plot twist’ mais bonito que já aconteceu na vida dele!",
+            ", se o amor fosse um aplicativo, ele teria só um favorito: você!",
+            ", com você, até as noites frias são cheias de calor!",
+            ", ele não precisa de fadas, pois sua presença já traz magia!",
+            ", seu amor faz até os dias mais comuns se tornarem extraordinários!"
         ];
 
         const titulo = document.querySelector("#titulo h1");
@@ -58,11 +168,12 @@
         const botao = document.querySelector("#botao button");
         const frase = document.querySelector("#frase p");
 
+        // Função de enviar o nome para o LocalStorage.
         function envio() {
             localStorage.setItem("Esposa", entrada.value);
             alert("Seu nome foi salvo com sucesso!");
 
-            localStorage.setItem("display","none")
+            localStorage.setItem("display", "none")
 
             titulo.style.display = "none"
             entrada.style.display = "none"
@@ -76,7 +187,7 @@
 
         }
 
-        // Recuperar o nome salvo ao carregar a página
+        // Recuperar o nome salvo ao carregar a página.
         window.onload = function () {
             const esposa = localStorage.getItem("Esposa");
             const display = localStorage.getItem("display")
@@ -89,7 +200,7 @@
                 const mensagem = `${esposa}${frasesRomanticas[Math.floor(Math.random() * frasesRomanticas.length)]}`;
 
                 frase.textContent = (mensagem)
-                
+                getRandomRomanticImage();
             } else {
 
             }
