@@ -10,7 +10,6 @@
 
 <body>
 
-
     <div id="titulo">
         <h1>Qual o seu nome ?</h1>
     </div>
@@ -35,42 +34,29 @@
     </div>
 
     <div id="imagem">
-        <img src="img/a (1).jpg" alt="">
+        <img src="img/img (1).jpg" alt="">
     </div>
 
     <script>
-// Gera as imagens aleatórias.
-const romanticKeywords = ["romantic", "love", "couple", "sunset", "valentine"];
+        // Array com os nomes das imagens, até a img(24).jpg
+        const imagens = [
+            'img (1).jpg', 'img (2).jpg', 'img (3).jpg', 'img (4).jpg', 'img (5).jpg',
+            'img (6).jpg', 'img (7).jpg', 'img (8).jpg', 'img (9).jpg', 'img (10).jpg',
+            'img (11).jpg', 'img (12).jpg', 'img (13).jpg', 'img (14).jpg', 'img (15).jpg',
+            'img (16).jpg', 'img (17).jpg', 'img (18).jpg', 'img (19).jpg', 'img (20).jpg',
+            'img (21).jpg', 'img (22).jpg', 'img (23).jpg', 'img (24).jpg'
+        ];
 
-async function getRandomRomanticImage() {
-    const query = romanticKeywords[Math.floor(Math.random() * romanticKeywords.length)];
-    const url = `https://api.pexels.com/v1/search?query=${query}&per_page=10`;
+        // Função para selecionar uma imagem aleatória e exibi-la
+        function exibirImagemAleatoria() {
+            const indiceAleatorio = Math.floor(Math.random() * imagens.length);  // Seleciona um índice aleatório
+            const imagemSelecionada = imagens[indiceAleatorio];  // Pega o nome da imagem selecionada
 
-    // Defina sua chave de API aqui
-    const apiKey = 'L8vRjlZV54aGQs6II63nagb6fizPe1S5Njr1x8jlIDSRKDjrXaiaPwx0';  // Substitua pela sua chave da Pexels.
-
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${apiKey}`
+            // Substitui a fonte da imagem no HTML
+            document.querySelector("#imagem img").src = `img/${imagemSelecionada}`;
         }
-    });
 
-    // Verifica se a resposta da API é bem-sucedida
-    if (response.ok) {
-        const data = await response.json();
-        if (data.photos.length > 0) {
-            const randomPhoto = data.photos[Math.floor(Math.random() * data.photos.length)];
-            document.querySelector("#imagem img").src = randomPhoto.src.large;
-        }
-    } else {
-        console.error('Erro ao buscar imagens:', response.statusText);
-    }
-}
-
-
-
-        // Gera frases românticas.
+        // Função para gerar frases românticas
         const frasesRomanticas = [
             ", você é o melhor capítulo da história da vida dele!",
             ", se amor fosse um idioma, ele só falaria sobre você!",
@@ -163,6 +149,32 @@ async function getRandomRomanticImage() {
             ", seu amor faz até os dias mais comuns se tornarem extraordinários!"
         ];
 
+        function gerarGradienteAleatorio() {
+            // Array com diferentes combinações de cores
+            const cores = [
+                ['#FFB6C1', '#FF69B4'], // Gradiente rosa claro e rosa choque
+                ['#FAD0C4', '#FFD1FF'], // Gradiente rosa claro e lilás
+                ['#FFC0CB', '#FFB6C1'], // Gradiente rosa claro e blush
+                ['#FFDEE9', '#B5FFFC'], // Gradiente rosa claro e azul claro suave
+                ['#E2A1D3', '#F9D3E1'], // Gradiente lilás suave e rosa claro
+                ['#F8B7D4', '#F9A8D4'], // Gradiente rosa bebê e lavanda suave
+                ['#FFD1DC', '#FFB6C1'], // Gradiente rosa claro e pêssego suave
+                ['#F3C9D8', '#F5A6D8'], // Gradiente rosa pastel e lilás suave
+                ['#FBE4D5', '#FAD0C4'], // Gradiente creme suave e pêssego claro
+                ['#D3C0EB', '#F4B3C2']  // Gradiente lavanda suave e rosa suave
+            ];
+
+
+            // Seleciona um índice aleatório do array
+            const indiceAleatorio = Math.floor(Math.random() * cores.length);
+
+            // Cria o gradiente linear com as cores aleatórias
+            const gradiente = `linear-gradient(-90deg, ${cores[indiceAleatorio][0]} 0%, ${cores[indiceAleatorio][1]} 100%)`;
+
+            // Aplica o gradiente ao corpo da página
+            document.body.style.background = gradiente;
+        }
+
         const titulo = document.querySelector("#titulo h1");
         const entrada = document.querySelector("#entrada input");
         const botao = document.querySelector("#botao button");
@@ -173,36 +185,35 @@ async function getRandomRomanticImage() {
             localStorage.setItem("Esposa", entrada.value);
             alert("Seu nome foi salvo com sucesso!");
 
-            localStorage.setItem("display", "none")
+            localStorage.setItem("display", "none");
 
-            titulo.style.display = "none"
-            entrada.style.display = "none"
-            botao.style.display = "none"
-            frase.style.display = "none"
+            titulo.style.display = "none";
+            entrada.style.display = "none";
+            botao.style.display = "none";
+            frase.style.display = "none";
 
             const esposa = localStorage.getItem("Esposa");
             const mensagem = `${esposa}${frasesRomanticas[Math.floor(Math.random() * frasesRomanticas.length)]}`;
 
-            frase.textContent = (mensagem)
-
+            frase.textContent = (mensagem);
+            exibirImagemAleatoria(); // Chama a função para exibir a imagem aleatória
         }
 
         // Recuperar o nome salvo ao carregar a página.
         window.onload = function () {
             const esposa = localStorage.getItem("Esposa");
-            const display = localStorage.getItem("display")
+            const display = localStorage.getItem("display");
 
-            titulo.style.display = `${display}`
-            entrada.style.display = `${display}`
-            botao.style.display = `${display}`
+            titulo.style.display = `${display}`;
+            entrada.style.display = `${display}`;
+            botao.style.display = `${display}`;
 
             if (esposa) {
                 const mensagem = `${esposa}${frasesRomanticas[Math.floor(Math.random() * frasesRomanticas.length)]}`;
 
-                frase.textContent = (mensagem)
-                getRandomRomanticImage();
-            } else {
-
+                frase.textContent = (mensagem);
+                exibirImagemAleatoria(); // Exibe a imagem aleatória na inicialização
+                gerarGradienteAleatorio();
             }
         };
     </script>
